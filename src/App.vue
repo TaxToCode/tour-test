@@ -1,30 +1,74 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+import { ref, onMounted } from 'vue';
+import { useProcessTour, useActivateTourOverlay } from './hooks/useTourOverlay'
+import { DEMO_EL_LIST } from './constants'
 
+const demoElContainer = ref(null);
+const randomizeDemoElPositions = () => {
+  const els = demoElContainer.value.children;
+  for (let el of els) {
+    const x = Math.floor(Math.random() * 400);
+    const y = Math.floor(Math.random() * 200);
+    el.style.transform = `translate(${x}%, ${y}%)`;
+  }
+}
+onMounted(() => {
+  randomizeDemoElPositions();
+});
+
+</script>
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="logo__container">
+    <img class="logo__image logo__image--medi" alt="Medistream logo" src="./assets/logo-medistream.svg">
   </div>
-  <HelloWorld msg="Vite + Vue" />
+  <div class="buttons-container">
+    <button @click="() => randomizeDemoElPositions()">요소 위치 수정</button>
+    <button @click="() => useActivateTourOverlay()">튜토리얼 시작</button>
+  </div>
+  <div class="demo-el__container" ref="demoElContainer">   
+    <component v-for="demoEl in DEMO_EL_LIST" :key="demoEl.id" :is="demoEl.component" :id="demoEl.id" @click="() => useProcessTour()" />
+  </div>
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss" scoped>
+.logo__container {
+  display: flex;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+
+  .logo__image {
+    width: 400px;
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+
+  button {
+    border: 1px solid #959090;
+    border-radius: 10px;
+    background-color: transparent;
+    font-size: 20px;
+    width: 150px;
+    box-sizing: border-box;
+    padding: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #faf9f9;
+    }
+  }
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.demo-el__container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 50px auto 0;
+  height: 500px;
 }
 </style>
