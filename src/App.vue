@@ -7,8 +7,8 @@ const demoElContainer = ref(null);
 const randomizeDemoElPositions = () => {
   const els = demoElContainer.value.children;
   for (let el of els) {
-    const x = 150 +Math.floor(Math.random() * 200);
-    const y = Math.floor(Math.random() * 80);
+    const x = Math.floor(Math.random() * 600);
+    const y = Math.floor(Math.random() * 200);
     el.style.transform = `translate(${x}%, ${y}%)`;
   }
 }
@@ -34,6 +34,7 @@ onMounted(() => {
 .logo__container {
   display: flex;
   height: 100px;
+  min-width: 1200px;
   justify-content: center;
   align-items: center;
 
@@ -44,6 +45,7 @@ onMounted(() => {
 
 .buttons-container {
   display: flex;
+  min-width: 1200px;
   justify-content: center;
   align-items: center;
   gap: 20px;
