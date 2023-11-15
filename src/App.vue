@@ -7,8 +7,8 @@ const demoElContainer = ref(null);
 const randomizeDemoElPositions = () => {
   const els = demoElContainer.value.children;
   for (let el of els) {
-    const x = Math.floor(Math.random() * 400);
-    const y = Math.floor(Math.random() * 200);
+    const x = 150 +Math.floor(Math.random() * 200);
+    const y = Math.floor(Math.random() * 80);
     el.style.transform = `translate(${x}%, ${y}%)`;
   }
 }
