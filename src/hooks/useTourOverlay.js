@@ -29,8 +29,8 @@ export const useActivateTourOverlay = () => {
   overlayContainer.style.position = "absolute";
   overlayContainer.style.top = 0;
   overlayContainer.style.left = 0;
-  overlayContainer.style.width = "100vw";
-  overlayContainer.style.height = "100vh";
+  overlayContainer.style.width = "100%";
+  overlayContainer.style.height = "100%";
   overlayContainer.style.zIndex = 9999;
   document.body.appendChild(overlayContainer);
 
